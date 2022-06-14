@@ -12,7 +12,7 @@ def meter_image_view(request):
             return redirect('success')
     else:
         form = MeterForm()
-    return render(request, 'meter_image_form.html', {'form': form})
+    return render(request, 'imgform.html', {'form': form})
 
 
 def success(request):
