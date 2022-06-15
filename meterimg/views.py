@@ -1,19 +1,13 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from form import *
+from meterimg.models import Meter
+from meterimg.serializers import ImageSerializers
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework import viewsets
 
 
-def meter_image_view(request):
-    if request.method == 'POST':
-        form = MeterForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = MeterForm()
-    return render(request, 'imgform.html', {'form': form})
+class ImageViewset(viewsets.ModelViewSet):
+    queryset = Meter.objects.all()
+    serializer_class = ImageSerializers
 
 
-def success(request):
-    return HttpResponse('successfully uploaded')

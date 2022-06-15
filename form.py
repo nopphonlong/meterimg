@@ -6,4 +6,4 @@ class MeterForm(forms.ModelForm):
 
 	class Meta:
 		model = Meter
-		fields = ['name', 'hotel_Main_Img']
+		fields = ['name', 'Meter_Main_Img']

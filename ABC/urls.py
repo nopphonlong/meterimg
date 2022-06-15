@@ -13,18 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.db import router
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
 from meterimg.views import *
-from meterimg.api import routers
+from meterimg.urls import router
 
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('image_upload', meter_image_view, name='image_upload'),
-                  path('api/', include(routers.urls)),
-
+                  path('', include(router.urls))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
