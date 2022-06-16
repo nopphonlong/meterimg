@@ -31,9 +31,9 @@ SECRET_KEY = 'django-insecure-m8%u5o4!d0i5)v%7$_fs_@)j1-+1x*w64j*entnzek^cph1t3a
 # django-insecure-m8%u5o4!d0i5)v%7$_fs_@)j1-+1x*w64j*entnzek^cph1t3a
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [https://abc-platform.azurewebsites.net]
 
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
