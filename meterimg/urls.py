@@ -6,7 +6,7 @@ from meterimg import views
 
 router = routers.DefaultRouter()
 router.register(r'Images', views.ImageViewset)
-
+router.register(r'JustImages', views.JustImageViewset)
 
 urlpatterns = [
     path('', include(router.urls)),

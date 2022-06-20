@@ -1,5 +1,5 @@
-from meterimg.models import Meter
-from meterimg.serializers import ImageSerializers
+from meterimg.models import Meter, Images
+from meterimg.serializers import ImageSerializers, JustimageimageSerializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,3 +11,6 @@ class ImageViewset(viewsets.ModelViewSet):
     serializer_class = ImageSerializers
 
 
+class JustImageViewset(viewsets.ModelViewSet):
+    queryset = Images.objects.all()
+    serializer_class = JustimageimageSerializers

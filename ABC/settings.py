@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'meterimg',
     'rest_framework',
 
+
 ]
 
 MIDDLEWARE = [
