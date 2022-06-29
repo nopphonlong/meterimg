@@ -22,6 +22,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -33,8 +34,8 @@ SECRET_KEY = 'django-insecure-m8%u5o4!d0i5)v%7$_fs_@)j1-+1x*w64j*entnzek^cph1t3a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ALLOWED_HOSTS = ['abc-platform.azurewebsites.net']
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -47,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'meterimg',
     'rest_framework',
-
+    'gauge_reader_main',
 
 ]
 
