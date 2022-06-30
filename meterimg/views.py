@@ -42,13 +42,14 @@ def test(request):
             serializer.save()
             img_path = serializer.data['meter_main_img'][1:]
             print(img_path)
-            value = getpredict(img_path)
+            gauge_types = getpredict(img_path)
+            gauge_value = get_gauge_value(img_path, min_value=-1, max_value=3, scale_width=0.5, scale_height=0.5)
             # print(value)
-            print(f"Predicted Class: {value[0]}, {value[1]:0.2f}%\n")
-            print(f"Gauge reading value: {get_gauge_value(img_path, min_value=-1, max_value=3, scale_width=0.5, scale_height=0.5):.2f} bar")
+            print(f"Predicted Class: {gauge_types[0]}, {gauge_types[1]:0.2f}%\n")
+            print(f"Gauge reading value: {gauge_value} bar ")
             gauge_dict = {
-                "Gauge_Type": value[0],
-                "Gauge_Value": get_gauge_value(img_path, min_value=-1, max_value=3, scale_width=0.5, scale_height=0.5)
+                "Gauge_Type": gauge_types[0],
+                "Gauge_Value": gauge_value
             }
 
             return HttpResponse(json.dumps(gauge_dict), content_type='application/json')
