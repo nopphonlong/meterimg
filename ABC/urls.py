@@ -20,10 +20,17 @@ from django.conf.urls.static import static
 from django.conf import settings
 from meterimg.views import *
 from meterimg.urls import router
+from rest_framework.schemas import get_schema_view
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
-                  path('api/tests/', test),
+                  path('api_schema', get_schema_view(title='API Schema', description='All API'), name='api_schema'),
+                  path('tests/', test),
                   path('admin/', admin.site.urls),
-                  path('', include(router.urls))
+                  path('', include(router.urls)),
+                  path('swagger-ui/', TemplateView.as_view(
+                      template_name='docs.html',
+                      extra_context={'schema_url': 'api_schema'}
+                  ), name='swagger-ui'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

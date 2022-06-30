@@ -6,6 +6,14 @@ from rest_framework.response import Response
 from gauge_reader_main.models.Gauge_classification import getpredict
 from gauge_reader_main.models.guage_reading import get_gauge_value
 import json
+from django.http import HttpResponse
+
+
+def serialize_sets(obj):
+    if isinstance(obj, set):
+        return list(obj)
+
+    return obj
 
 
 class ImageViewset(viewsets.ModelViewSet):
@@ -19,7 +27,7 @@ class JustImageViewset(viewsets.ModelViewSet):
 
 
 @api_view(['GET', 'POST'])
-def test(request, format=None):
+def test(request):
     """
     List all code snippets, or create a new snippet.
     """
@@ -38,5 +46,11 @@ def test(request, format=None):
             # print(value)
             print(f"Predicted Class: {value[0]}, {value[1]:0.2f}%\n")
             print(f"Gauge reading value: {get_gauge_value(img_path, min_value=-1, max_value=3, scale_width=0.5, scale_height=0.5):.2f} bar")
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            gauge_dict = {
+                "Gauge_Type": value[0],
+                "Gauge_Value": get_gauge_value(img_path, min_value=-1, max_value=3, scale_width=0.5, scale_height=0.5)
+            }
+
+            return HttpResponse(json.dumps(gauge_dict), content_type='application/json')
+            # return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
