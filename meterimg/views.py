@@ -26,7 +26,7 @@ class JustImageViewset(viewsets.ModelViewSet):
     serializer_class = JustimageimageSerializers
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def test(request):
     """
     List all code snippets, or create a new snippet.
@@ -55,3 +55,6 @@ def test(request):
             return HttpResponse(json.dumps(gauge_dict), content_type='application/json')
             # return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # elif request.method == 'DELETE':
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
